@@ -308,15 +308,15 @@
                 <button onclick="toggleEditor('css')">CSS</button>
             </div>
             <textarea id="htmlInputPractice" placeholder="HTML 코드를 입력하세요...">
-<div class="Home-classification-column">
-  <img class="column-img" src="https://images.unsplash.com/vector-1740878694530-d3ce3827c6e7?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTJ8fGN1dGUlMjBjaGlja2VufGVufDB8fDB8fHww" alt="예시 이미지">
-  <h1 class="Home-classification-column_name">카드 제목</h1>
-  <detail class="Home-classification-column_detail">
-    <p>카드 설명 첫 번째 줄입니다.</p>
-    <p>카드 설명 두 번째 줄입니다.</p>
-  </detail>
-  <button class="Home-classification-column_button">더 알아보기</button>
-</div>
+&lt;div class="Home-classification-column"&gt;
+  &lt;img class="column-img" src="https://images.unsplash.com/vector-1740878694530-d3ce3827c6e7?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTJ8fGN1dGUlMjBjaGlja2VufGVufDB8fDB8fHww" alt="예시 이미지"&gt;
+  &lt;h1 class="Home-classification-column_name"&gt;카드 제목&lt;/h1&gt;
+  &lt;detail class="Home-classification-column_detail"&gt;
+    &lt;p&gt;카드 설명 첫 번째 줄입니다.&lt;/p&gt;
+    &lt;p&gt;카드 설명 두 번째 줄입니다.&lt;/p&gt;
+  &lt;/detail&gt;
+  &lt;button class="Home-classification-column_button"&gt;더 알아보기&lt;/button&gt;
+&lt;/div&gt;
             </textarea>
             <textarea id="cssInputPractice" placeholder="CSS 코드를 입력하세요..." style="display: none;">
 .Home-classification-column {
@@ -387,7 +387,7 @@
           const cssCode = document.getElementById('cssInputPractice').value;   // CSS 코드 가져오기
           const resultFrameContainer = document.getElementById('practiceResultOutput'); // 결과 출력 div 요소 가져오기
 
-          resultFrameContainer.innerHTML = '<h3>결과 출력</h3>'; // 기존 iframe 제거 및 제목 유지
+          resultFrameContainer.innerHTML = ''; // 기존 iframe 제거 (결과 출력 제목도 제거됨)
           const iframe = document.createElement('iframe'); // 새 iframe 생성
           // iframe 스타일 설정
           iframe.style.width = '100%';
@@ -410,56 +410,16 @@
       }
 
       /**
-       * 실습 영역을 초기 예시 코드로 리셋하고 결과 출력 영역을 업데이트하는 함수
+       * 실습 영역을 초기화(빈 칸으로 만듦)하는 함수 (원본 버전)
        */
       function resetPracticeArea() {
-          // 원래 HTML 예시 코드로 복원 (<, > 사용)
-          document.getElementById('htmlInputPractice').value = `
-<div class="Home-classification-column">
-  <img class="column-img" src="https://images.unsplash.com/vector-1740878694530-d3ce3827c6e7?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTJ8fGN1dGUlMjBjaGlja2VufGVufDB8fDB8fHww" alt="예시 이미지">
-  <h1 class="Home-classification-column_name">카드 제목</h1>
-  <detail class="Home-classification-column_detail">
-    <p>카드 설명 첫 번째 줄입니다.</p>
-    <p>카드 설명 두 번째 줄입니다.</p>
-  </detail>
-  <button class="Home-classification-column_button">더 알아보기</button>
-</div>`;
-
-          // 원래 CSS 예시 코드로 복원
-          document.getElementById('cssInputPractice').value = `
-.Home-classification-column {
-    width: 250px; background-color: rgba(255, 231, 205, 1); border-radius: 12px;
-    padding: 20px; display: flex; justify-content: center; align-items: center;
-    flex-direction: column; margin: 20px auto;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.1); font-family: sans-serif;
-}
-.column-img {
-    width: 150px; height: 150px; object-fit: cover; border-radius: 8px;
-}
-.Home-classification-column_name {
-    margin-top: 15px; font-size: 1.3em; font-weight: bold;
-}
-.Home-classification-column_detail {
-    margin: 15px 0px; text-align: center;
-}
-.Home-classification-column_detail p {
-    margin: 5px 0px; font-size: 0.95em; color: #333; line-height: 1.4;
-}
-.Home-classification-column_button {
-    padding: 10px 20px; border-radius: 5px; border: none;
-    background-color: lightblue; box-sizing: border-box; cursor: pointer;
-    margin-top: 15px; font-weight: bold; transition: background-color 0.2s;
-}
-.Home-classification-column_button:hover { background-color: deepskyblue; }`;
-
-          // 결과 출력 영역 초기화 (제목 유지)
-          document.getElementById('practiceResultOutput').innerHTML = '<h3>결과 출력</h3>';
-
+          // HTML, CSS 입력창 비우기
+          document.getElementById('htmlInputPractice').value = '';
+          document.getElementById('cssInputPractice').value = '';
+          // 결과 출력 영역 비우기
+          document.getElementById('practiceResultOutput').innerHTML = '';
           // 에디터를 HTML 탭으로 전환
           toggleEditor('html');
-
-          // 업데이트 함수를 호출하여 초기 예시 코드의 실행 결과를 결과 출력 영역에 반영
-          updatePracticeOutput();
       }
 
       // 모든 textarea 요소에 Tab 키 입력 시 2칸 띄어쓰기 기능 추가
@@ -481,7 +441,9 @@
       // 페이지 로드 완료 시 초기 설정
       document.addEventListener('DOMContentLoaded', (event) => {
           toggleEditor('html'); // 기본으로 HTML 탭 활성화
-          updatePracticeOutput(); // 초기 로드 시 예시 코드 결과 표시
+          // 초기 로드 시에는 예시 코드를 보여주지 않고 빈 상태로 시작 (원본 버전 기준)
+          // 만약 초기 로드 시 예시 결과를 보여주고 싶다면 아래 줄의 주석을 해제하세요.
+          // updatePracticeOutput();
       });
     </script>
     </body>
